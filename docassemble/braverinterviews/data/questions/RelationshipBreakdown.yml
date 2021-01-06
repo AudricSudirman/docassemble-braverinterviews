@@ -1,0 +1,58 @@
+mandatory: true
+code: |
+  try: 
+    immigration_status = url_args['immigration_status']
+  except KeyError:
+    immigration_status
+  situations
+  relationship
+  if (situations['is_abused']):
+    abuse_options
+  ending_screen
+---
+question: What is your current Immigration Status?
+field: immigration_status
+choices:
+  - British National
+  - EU National
+  - Long Term Visa
+  - UK Partner Visa
+  - Student Visa
+---
+question: Relationship Breakdown
+fields:
+  - Select all that apply: situations
+    datatype: checkboxes
+    choices:
+      - Are you abused / threatened / assaulted?: is_abused
+      - Are you asked to leave?: is_leaving
+  - Your Relationship: relationship
+    input type: radio
+    choices:
+      - Are you a named tenant / owner?: tenant_owner
+      - Are you in a civil partnership / marriage?: partnership_marriage
+      - Neither of the above: neither
+---
+event: abuse_options
+question: Possible options for being abused
+subquestion: |
+  ### Apply for an Injunction
+  [You can apply for an injunction](https://www.gov.uk/injunction-domestic-violence) to protect you and your child from the abuser and decide who lives in the family home. If you need protection immediately, this can be done as an emergency order and does not require you to tell the person you want protection from.
+  
+  % if immigration_status != 'UK Partner Visa':
+  ### Emergency Housing
+  See the [official gov.uk website](https://www.gov.uk/if-youre-homeless-at-risk-of-homelessness).
+  % else:
+  ### Can claim benefits while applying to settle in the UK
+  If you have no money to support yourself, you can apply for [destitution domestic violence (DDV) concession](${ interview_url(i='docassemble.braverinterviews:data/questions/DDVConcession.yml') })
+  % endif
+  
+  ### Need to talk?
+  If you need someone to talk to, consider contacting the [National Domestic Abuse Helpline](https://www.nationaldahelpline.org.uk/) for women, or the [Men's Advice Line](https://mensadviceline.org.uk/) for Men.
+---
+event: ending_screen
+question: End of interview
+subquestion: |
+  You have reached the end of possible solutions this website can provide. 
+buttons:
+  - Finish: exit

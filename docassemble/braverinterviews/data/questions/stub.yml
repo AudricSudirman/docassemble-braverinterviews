@@ -1,0 +1,6 @@
+mandatory: true
+question: Could not find solution to your situation
+subquestion: |
+  If you see this, this is a stub page - which means there may be solutions not yet known to us!
+buttons:
+  Exit: exit

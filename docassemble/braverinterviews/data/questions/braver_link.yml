@@ -1,0 +1,33 @@
+event: assign_redirect
+code: |
+  redirect = action_argument('redirect')
+---
+event: ending_screen
+question: |
+  The interview is complete.
+buttons:
+  - Exit: exit
+    url: ${redirect}
+script: |
+  <script>
+    var variables;
+    get_interview_variables(function(data){
+      if (data.success){
+        variables = data.variables;
+        assign_redirect(variables["brave_url"]);
+      } else {
+        throw "could not get variables from interview";
+      }
+    });
+    
+    function assign_redirect(brave_url){
+      jQuery.ajax({
+        url: brave_url,
+        method: "POST",
+        data: variables,
+        success: function(response) {
+          action_call("assign_redirect", {"redirect": response["redirect"]});
+        }
+      });
+     }
+  </script>

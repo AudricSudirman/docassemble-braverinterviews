@@ -1,0 +1,43 @@
+include:
+  - braver_link.yml
+---
+mandatory: true
+code: |
+  age
+  if immigration_status == "British National":
+    resident_location
+  status_needs
+  brave_url = url_args['brave_api']
+  ending_screen
+      
+---
+question: In order to proceed, please provide your age
+fields:
+  - Age: age
+---
+question: What is your current Immigration Status?
+need: age
+field: immigration_status
+choices:
+  - British National
+  - EU National
+  - Long Term Visa
+  - UK Partner Visa
+  - Student Visa
+---
+question: Where do you currently reside?
+field: resident_location
+choices:
+  - Reside outside of the UK
+  - Reside within the UK
+---
+question: Please choose what factors are currently affecting your status
+field: status_needs
+choices:
+  - Children
+  - Eviction
+  - Pregnancy
+  - Prison Leaver
+  - Relationship Breakdown
+  - Repossession
+---

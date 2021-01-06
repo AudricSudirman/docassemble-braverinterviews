@@ -1,0 +1,278 @@
+mandatory: True
+question: Destitution Domestic Violence (DDV) Concession
+subquestion: |
+  You can apply for benefits for up to 3 months, as long as the following conditions are met:
+   
+   - In the UK on a temporary visa as a partner
+   - Your relationship has broken down because of domestic violence 
+   - You have no money to support yourself
+  
+  You should also complete the [form to settle in the UK as a victim of domestic violence](https://visas-immigration.service.gov.uk/product/set-dv).
+  
+  You can choose to either use this interview to walk you through the process of filling in the form, or do it yourself [here](https://www.gov.uk/government/publications/application-for-benefits-for-visa-holder-domestic-violence)
+buttons:
+  - Continue: continue
+
+---
+
+question: "Section 1: Personal Details - Name"
+fields:
+  - Name: name
+  - Surname: surname
+  - Other Names: other_names
+  - Title: title
+    choices:
+      - Mr
+      - Miss
+      - Mrs
+      - Ms
+      - Dr
+      - Other
+
+---
+
+question: "Section 1: Personal Details - Current Address"
+fields:
+  - House Number / Name: house_number_or_name
+  - Street Name: street_name
+  - Town/City: town_city
+  - County: county
+  - Country: country
+  - Postcode: postcode
+
+---
+
+question: "Section 1: Personal Details - Marital Address"
+fields:
+  - House Number / Name: house_number_or_name_marital
+  - Street Name: street_name_marital
+  - Town/City: town_city_marital
+  - County: county_marital
+  - Country: country_marital
+  - Postcode: postcode_marital
+
+---
+
+question: "Section 1: Personal Details - Relationship Breakdown"
+fields:
+  - Nationality: nationality
+  - Which country did you apply for a visa from?: visa_country
+  - Home Office reference number (if possible): office_ref_num
+    required: false
+  - Passport or Travel Document number: passport_num
+    required: false
+  - Date of Birth: dob
+    datatype: date
+
+---
+
+question: "Section 1: Personal Details - Credentials"
+fields:
+  - Date of breakdown / stopped living together: date_breakdown
+    datatype: date
+  - Further details of how you supported yourself since relationship breakdown: details_breakdown
+    input type: area
+
+---
+
+question: "Section 1: Personal Details - Partner"
+fields:
+  - Name of Spouse / Partner: name_partner
+  - Spouse / Partner's Date of Birth: dob_partner
+    datatype: date
+
+---
+
+question: "Section 1: Personal Details - Partner (HM Forces)"
+subquestion: Only complete these questions if your last grant of leave was as the partner of a serving or discharged member of the HM forces.
+fields:
+  - Is your spouse/partner a serving or discharged member of HM forces?: is_hm_forces_partner
+    required: false
+  - If your spouse/ partner is or was a member of the armed forces, is he or she a British citizen?: is_british_partner
+    required: false
+  - If not, please give the date when your spouse/partner joined HM forces.: date_hm_forces_partner
+    required: false
+  - If your spouse/partner is no longer serving, please give the date of discharge.: date_discharge_partner
+    required: false
+    datatype: date
+
+---
+
+question: "Personal Details - Biometric Residence Permit (if possible)"
+fields:
+  - Name in which you applied for a Biometric Residence Permit: brp_name
+    required: false
+  - Date on which and place where fingerprints were taken: date_brp
+    required: false
+
+---
+
+question: "Section 2: Dependants - Dependant 1"
+subquestion: If you intend to apply to the Department for Work and Pensions (DWP) for access to public funds benefits for children under the age of 18 living with you in the UK, please complete this section.
+fields:
+  - Name: name_dependent1
+    required: false
+  - Place of Birth: birthplace_dependent1
+    required: false
+  - Date of Birth: dob_dependent1
+    required: false
+    datatype: date
+  - Sex: sex_dependent1
+    choices:
+      - Male
+      - Female
+    required: false
+  - Nationality: nationality_dependent1
+    required: false
+  - Home Office reference number (if possible): office_ref_num_dependent1
+    required: false
+  - In which country was the biometric residence permit applied for: brp_country_dependent1
+    required: false
+  - Date and location of where fingerprints were taken: dob_loc_fingerprints_dependent1
+    required: false
+
+---
+
+question: "Section 2: Dependants - Dependant 2"
+subquestion: If you intend to apply to the Department for Work and Pensions (DWP) for access to public funds benefits for children under the age of 18 living with you in the UK, please complete this section.
+fields:
+  - Name: name_dependent2
+    required: false
+  - Place of Birth: birthplace_dependent2
+    required: false
+  - Date of Birth: dob_dependent2
+    required: false
+    datatype: date
+  - Sex: sex_dependent2
+    choices:
+      - Male
+      - Female
+    required: false
+  - Nationality: nationality_dependent2
+    required: false
+  - Home Office reference number (if possible): office_ref_num_dependent2
+    required: false
+  - In which country was the biometric residence permit applied for: brp_country_dependent2
+    required: false
+  - Date and location of where fingerprints were taken: dob_loc_fingerprints_dependent2
+    required: false
+
+---
+
+question: "Section 3: Your Representative"
+subquestion: If you have a representative you would like the UK Government to talk to, complete this section.
+fields:
+  - Do you give the Home Office permission to contact you via an immigration advisor, refuge or advice agency?: permission_rep
+    required: false
+    choices:
+      - Yes
+      - No
+  - Name of the company: name_rep
+  - House number or name: house_rep
+  - Street name: street_rep
+  - Town/City: town_city_rep
+  - County: county_rep
+  - Country: country_rep
+  - Postcode: postcode_rep
+  - Email: email_rep
+  - Are you content for us to send information to the address you have provided?: is_ok_address
+    datatype: yesnoradio
+
+---
+
+question: "Section 3: Intent"
+fields:
+  - Do you intend to make an application for indefinite leave to remain using a  SET(DV) form on the basis that you have suffered domestic violence?: is_intent_indefinite
+    datatype: yesnoradio
+  - Are you destitute? (destitution means that you have no access to funds or are reliant on a third party to pay for your essential living costs such as basic accommodation and food).: is_destitute
+    datatype: yesnoradio
+  - Do you need access to income based public funds in order to pay for your accommodation and support for you while you make your indefinite leave to remain application?: is_benefits_needed
+    datatype: yesnoradio
+
+---
+code: |
+  def yesnoToIndex(var):
+    if (var == True):
+      return 0
+    elif (var == False):
+      return 1
+---
+
+question: Here is your DDV Concession form
+subquestion: It should be emailed to DomesticViolence2@homeoffice.gov.uk or posted to (FILL IN LATER). [answers](${all_variables()})
+attachment:
+  name: DDV Concession Form
+  filename: ddv-concessions-form
+  pdf template file: ddv-concessions-form.pdf
+  field code:
+      - "form1[0].#subform[3].Title[0]": name
+      - "form1[0].#subform[3].Title[1]": surname
+      - "form1[0].#subform[3].Title[2]": other_names
+      
+      - "form1[0].#subform[3].TextField3[0]": house_number_or_name
+      - "form1[0].#subform[3].TextField3[3]": street_name
+      - "form1[0].#subform[3].TextField3[4]": town_city
+      - "form1[0].#subform[3].TextField3[2]": county
+      - "form1[0].#subform[3].TextField3[1]": country
+      - "form1[0].#subform[3].TextField3[5]": postcode
+      
+      - "form1[0].#subform[3].TextField3[6]": house_number_or_name_marital
+      - "form1[0].#subform[3].TextField3[7]": street_name_marital
+      - "form1[0].#subform[3].TextField3[8]": town_city_marital
+      - "form1[0].#subform[3].TextField3[9]": county_marital
+      - "form1[0].#subform[3].TextField3[10]": country_marital
+      - "form1[0].#subform[3].TextField3[11]": postcode_marital
+      
+      - "form1[0].#subform[3].DateTimeField1[0]": date_breakdown
+      - "form1[0].#subform[4].TextField7[0]": details_breakdown
+      
+      - "form1[0].#subform[4].TextField8[0]": nationality
+      - "form1[0].#subform[4].TextField8[1]": visa_country
+      - "form1[0].#subform[4].TextField8[2]": office_ref_num
+      - "form1[0].#subform[4].TextField8[3]": passport_num
+      - "form1[0].#subform[4].DateTimeField1[1]": dob
+      
+      - "form1[0].#subform[4].TextField8[4]": name_partner
+      - "form1[0].#subform[4].DateTimeField1[2]": dob_partner
+      
+      - "form1[0].#subform[5].RadioButtonList[1]": yesnoToIndex(is_hm_forces_partner)
+      - "form1[0].#subform[5].RadioButtonList[2]": yesnoToIndex(is_british_partner)
+      - "form1[0].#subform[5].DateTimeField1[3]": date_hm_forces_partner
+      - "form1[0].#subform[5].DateTimeField1[4]": date_discharge_partner
+      
+      - "form1[0].#subform[5].TextField9[0]": brp_name
+      - "form1[0].#subform[5].TextField9[1]": date_brp
+      
+      - "form1[0].#subform[6].TextField10[0]": name_dependent1
+      - "form1[0].#subform[6].TextField10[1]": birthplace_dependent1
+      - "form1[0].#subform[6].RadioButtonList[3]": sex_dependent1
+      - "form1[0].#subform[6].DateTimeField1[5]": dob_dependent1
+      - "form1[0].#subform[6].TextField10[2]": nationality_dependent1
+      - "form1[0].#subform[6].TextField8[5]": office_ref_num_dependent1
+      - "form1[0].#subform[6].TextField10[3]": brp_country_dependent1
+      - "form1[0].#subform[6].TextField10[4]": dob_loc_fingerprints_dependent1
+      
+      - "form1[0].#subform[6].TextField10[5]": name_dependent2
+      - "form1[0].#subform[6].TextField10[6]": birthplace_dependent2
+      - "form1[0].#subform[6].RadioButtonList[4]": sex_dependent2
+      - "form1[0].#subform[6].DateTimeField1[6]": dob_dependent2
+      - "form1[0].#subform[6].TextField10[7]": nationality_dependent2
+      - "form1[0].#subform[6].TextField8[6]": office_ref_num_dependent2      
+      - "form1[0].#subform[6].TextField10[8]": brp_country_dependent2
+      - "form1[0].#subform[6].TextField10[9]": dob_loc_fingerprints_dependent2
+      
+      - "form1[0].#subform[9].RadioButtonList[8]": yesnoToIndex(permission_rep)
+      - "form1[0].#subform[9].TextField8[7]": name_rep
+      - "form1[0].#subform[9].TextField3[12]": house_rep
+      - "form1[0].#subform[9].TextField3[15]": street_rep
+      - "form1[0].#subform[9].TextField3[16]": town_city_rep
+      - "form1[0].#subform[9].TextField3[14]": county_rep
+      - "form1[0].#subform[9].TextField3[13]": country_rep
+      - "form1[0].#subform[9].TextField3[17]": postcode_rep
+      - "form1[0].#subform[9].TextField10[10]": email_rep
+      - "form1[0].#subform[9].RadioButtonList[5]": yesnoToIndex(is_ok_address)
+      
+      - "form1[0].#subform[9].RadioButtonList[6]": yesnoToIndex(is_intent_indefinite)
+      - "form1[0].#subform[9].RadioButtonList[9]": yesnoToIndex(is_destitute)
+      - "form1[0].#subform[9].RadioButtonList[7]": yesnoToIndex(is_benefits_needed)
+mandatory: true
